@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Introduction &#8212; CA4015 Clustering Assignment</title>
+    <title>Introduction &#8212; CA4015 Clustering Assignment - Iowa Gambling Task</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -43,8 +43,6 @@
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -77,10 +75,10 @@
         
       
       
-      <img src="_static/logo.png" class="logo" alt="logo">
+      <img src="_static/download.jpeg" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">CA4015 Clustering Assignment</h1>
+      <h1 class="site-logo" id="site-title">CA4015 Clustering Assignment - Iowa Gambling Task</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -103,7 +101,12 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="notebooks.html">
-   Content with notebooks
+   Data Exploration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="preparation.html">
+   TEST
   </a>
  </li>
 </ul>
@@ -188,6 +191,24 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#iowa-gambling-task-igt">
+   Iowa Gambling Task (IGT)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#datasets-used">
+   Datasets used
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -198,17 +219,71 @@
                 
   <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<p>This is a small sample book to give you a feel for how book content is
-structured.</p>
+<div class="section" id="iowa-gambling-task-igt">
+<h2>Iowa Gambling Task (IGT)<a class="headerlink" href="#iowa-gambling-task-igt" title="Permalink to this headline">¶</a></h2>
+<p>This assignment is based around the studies conducted for the <a class="reference external" href="https://openpsychologydata.metajnl.com/articles/10.5334/jopd.ak/">Iowa Gambling Task</a>
+In this study 617 healthy participants, the participants have no neurological impairments, are being assessed across 10 independent studies. During the task the partipants are are asked to select on of four cards on a screen, they are given a balance of 2000 USD. The cards they are presented with will either award them or deduct money from their balance. The purpose of the game is to win as much money as possible. In the selection of cards some decks are considered to be “good” and “bad”, meaning some decks will reward more then others.</p>
+</div>
+<div class="section" id="datasets-used">
+<h2>Datasets used<a class="headerlink" href="#datasets-used" title="Permalink to this headline">¶</a></h2>
+<p>The data being used for this assignment is taken from many different labs ranging in number of participants and number of trials.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Here is a note!</p>
+<p>The smallest study uses 15 participants while the biggest study uses 162 participants.</p>
 </div>
-<p>And here is a code block:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">e</span> <span class="o">=</span> <span class="n">mc</span><span class="o">^</span><span class="mi">2</span>
-</pre></div>
+<p>Here is a list of the data sets being used for the assignment:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Study</p></th>
+<th class="head"><p>Number of participants</p></th>
+<th class="head"><p>Number of trials</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Fridberg et al. 3</p></td>
+<td><p>15</p></td>
+<td><p>95</p></td>
+</tr>
+<tr class="row-odd"><td><p>Horstmannb</p></td>
+<td><p>162</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-even"><td><p>Kjome et al. 5</p></td>
+<td><p>19</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-odd"><td><p>Maia &amp; McClelland 6</p></td>
+<td><p>40</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-even"><td><p>Premkumar et al. 7</p></td>
+<td><p>25</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-odd"><td><p>Steingroever et al. 8</p></td>
+<td><p>70</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-even"><td><p>Steingroever et al. 9</p></td>
+<td><p>57</p></td>
+<td><p>150</p></td>
+</tr>
+<tr class="row-odd"><td><p>Wetzels et al. 15c</p></td>
+<td><p>41</p></td>
+<td><p>150</p></td>
+</tr>
+<tr class="row-even"><td><p>Wood et al. 16</p></td>
+<td><p>153</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-odd"><td><p>Worthy et al. 17</p></td>
+<td><p>35</p></td>
+<td><p>100</p></td>
+</tr>
+</tbody>
+</table>
+<p>A link to the data is available <a class="reference external" href="https://openpsychologydata.metajnl.com/articles/10.5334/jopd.ak/">here</a></p>
 </div>
-<p>Check out the content pages bundled with this sample book to see more.</p>
 <div class="toctree-wrapper compound">
 </div>
 </div>
