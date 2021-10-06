@@ -28,3 +28,5 @@ Here is a list of the data sets being used for the assignment:
 | Worthy et al. 17       | 35                     | 100              |
 
 A link to the data is available [here](https://openpsychologydata.metajnl.com/articles/10.5334/jopd.ak/)
+
+As part of this assignment, k-means clustering will be used on the data sets above. 
