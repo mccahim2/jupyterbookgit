@@ -220,11 +220,6 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-a-role">
-     Using a role
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#adding-a-citation">
      Adding a citation
     </a>
@@ -292,21 +287,25 @@ Here is a note
 <p>In your built book.</p>
 <p>For more information on writing directives, see the
 <a class="reference external" href="https://myst-parser.readthedocs.io/">MyST documentation</a>.</p>
-</div>
-<div class="section" id="using-a-role">
-<h3>Using a role<a class="headerlink" href="#using-a-role" title="Permalink to this headline">¶</a></h3>
-<p>Roles are very similar to directives, but they are less-complex and written
-entirely on one line. You can insert a role into your book’s content with
-this pattern:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Some content {rolename}`and here is my role&#39;s content!`
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>### Using a role
+
+Roles are very similar to directives, but they are less-complex and written
+entirely on one line. You can insert a role into your book&#39;s content with
+this pattern:
+
+```
+Some content {rolename}`and here is my role&#39;s content!`
+```
+
+Again, roles will only work if `rolename` is a valid role&#39;s name. For example,
+the `doc` role can be used to refer to another page in your book. You can
+refer directly to another page by its relative path. For example, the
+role syntax `` {doc}`intro` `` will result in: {doc}`intro`.
+
+For more information on writing roles, see the
+[MyST documentation](https://myst-parser.readthedocs.io/).
 </pre></div>
 </div>
-<p>Again, roles will only work if <code class="docutils literal notranslate"><span class="pre">rolename</span></code> is a valid role’s name. For example,
-the <code class="docutils literal notranslate"><span class="pre">doc</span></code> role can be used to refer to another page in your book. You can
-refer directly to another page by its relative path. For example, the
-role syntax <code class="docutils literal notranslate"><span class="pre">{doc}`intro`</span></code> will result in: <a class="reference internal" href="intro.html"><span class="doc">Introduction</span></a>.</p>
-<p>For more information on writing roles, see the
-<a class="reference external" href="https://myst-parser.readthedocs.io/">MyST documentation</a>.</p>
 </div>
 <div class="section" id="adding-a-citation">
 <h3>Adding a citation<a class="headerlink" href="#adding-a-citation" title="Permalink to this headline">¶</a></h3>

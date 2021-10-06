@@ -52,7 +52,7 @@ In your built book.
 For more information on writing directives, see the
 [MyST documentation](https://myst-parser.readthedocs.io/).
 
-
+````python
 ### Using a role
 
 Roles are very similar to directives, but they are less-complex and written
@@ -70,7 +70,7 @@ role syntax `` {doc}`intro` `` will result in: {doc}`intro`.
 
 For more information on writing roles, see the
 [MyST documentation](https://myst-parser.readthedocs.io/).
-
+````
 
 ### Adding a citation
 
