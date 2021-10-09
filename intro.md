@@ -29,4 +29,10 @@ Here is a list of the data sets being used for the assignment:
 
 A link to the data is available [here](https://openpsychologydata.metajnl.com/articles/10.5334/jopd.ak/)
 
-As part of this assignment, k-means clustering will be used on the data sets above. 
+As part of this assignment, k-means clustering will be used on the data sets above.
+Clustering is an unsupervised machine learning problem, often used to find interesting patterns in data
+
+K-means clustering is used to assign examples to clusters in an effort to minimize the variance within each cluster.
+It is used to quickly predict groupings from within an unlabeled dataset.
+
+Our aim is to model the underlying structure of the data in order to learn from data and identify groups of data (segments/clusters) with similar characteristics/behaviours

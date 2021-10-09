@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Data Exploration
+# # Data Cleaning and Exploration
 
 # The first step of the data exploration phase is to import any necessary packages
 
@@ -96,11 +96,561 @@ index_95.isna().sum().sum() + index_100.isna().sum().sum() + index_150.isna().su
 
 # There are no null values in the choices data sets
 
+# Due to the large number of data sets, it might make it simpler to join tables based on the number of trials
+
+# :::{note}
+# Below I am making a new column for each number of trials. The new column shows to total won or lost per person.
+# :::
+
+# In[10]:
+
+
+total_win_95 = win_95.sum(axis=1)
+total_loss_95 = loss_95.sum(axis=1)
+total_95 = total_win_95 + total_loss_95
+
+total_win_100 = win_100.sum(axis=1)
+total_loss_100 = loss_100.sum(axis=1)
+total_100 = total_win_100 + total_loss_100
+
+total_win_150 = win_150.sum(axis=1)
+total_loss_150 = loss_150.sum(axis=1)
+total_150 = total_win_150 + total_loss_150
+
+
+# Making totals into pandas dataframes for further analysis
+
+# In[11]:
+
+
+total_95 = pd.DataFrame(total_95)
+total_95 = total_95.rename(columns={0: 'Total'})
+
+total_100 = pd.DataFrame(total_100)
+total_100 = total_100.rename(columns={0: 'Total'})
+
+total_150 = pd.DataFrame(total_150)
+total_150 = total_150.rename(columns={0: 'Total'})
+
+
+# Adding Study Names to the totals column
+
+# In[12]:
+
+
+total_95["Study_Type"] = index_95["Study"].values
+total_100["Study_Type"] = index_100["Study"].values
+total_150["Study_Type"] = index_150["Study"].values
+
+
+# Adding column for number of participants in the trial
+
+# In[13]:
+
+
+total_95["No_participants"] = 95
+total_100["No_participants"] = 100
+total_150["No_participants"] = 150
+
+
+# Adding total won and total lost per player over the course of the task
+
+# In[14]:
+
+
+total_95["Amount_won"] = win_95.sum(axis=1)
+total_95["Amount_lost"] = loss_95.sum(axis=1)
+
+total_100["Amount_won"] = win_100.sum(axis=1)
+total_100["Amount_lost"] = loss_100.sum(axis=1)
+
+total_150["Amount_won"] = win_150.sum(axis=1)
+total_150["Amount_lost"] = loss_150.sum(axis=1)
+
+
+# Adding choice of cards into each data frame
+# 
+# [Pandas series](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.value_counts.html), returns a Series containing counts of unique values.
+
+# In[15]:
+
+
+total_choice_95 = choice_95.apply(pd.Series.value_counts, axis=1)
+
+total_choice_100 = choice_100.apply(pd.Series.value_counts, axis=1)
+
+total_choice_150 = choice_150.apply(pd.Series.value_counts, axis=1)
+
+total_choices = total_choice_95.append(total_choice_100)
+total_choices = total_choices.append(total_choice_150)
+
+
+# In[16]:
+
+
+total_choices.shape
+
+
+# Showing the number of columns in the new datasets shows that no rows have been lost
+
+# In[17]:
+
+
+total_95.shape[0] +total_150.shape[0] + total_100.shape[0]
+
+
+# Showing the number of columns in the new datasets shows that no rows have been lost
+
+# In[18]:
+
+
+total_95.shape[0] +total_150.shape[0] + total_100.shape[0]
+
+
+# Joining all the totals datasets together
+
+# In[19]:
+
+
+totals = total_95.append(total_100)
+totals = totals.append(total_150)
+
+
+# In[20]:
+
+
+totals.shape
+
+
+# The last step of the data cleaning process is to join thte totals dataframe to the total_choices data frame
+
+# In[21]:
+
+
+all_data = pd.concat([totals, total_choices], axis=1)
+all_data = all_data.fillna(0)
+
+
+# In[22]:
+
+
+all_data.shape
+
+
 # ### Data Analysis/Exploration
 
-# Join all wins together, add column for what trial they were part of and also add how many partcipants were in that study
+# Analysing the wins and losses for each number of trials
+
+# Seaborn and Matplotlib will be used to visualise the data
+
+# In[23]:
+
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
+# In[24]:
+
+
+all_data.head()
+
+
+# Descriptive statistics for the Total column.
+
+# In[25]:
+
+
+all_data["Total"].describe()
+
+
+# In[26]:
+
+
+all_data[all_data["Total"] < 0].shape
+
+
+# 333 of the participants of these experiments lost money 
+
+# Now I will check a comparison of wins vs losses for each type of study (95 participants, 100 participants and 150 participants)
+
+# ### Analysis for studies containing 95 participants
+
+# In[27]:
+
+
+all_data_95 = all_data[all_data["No_participants"] == 95]
+
+
+# In[28]:
+
+
+all_data_95[[1,2,3,4]].sum()
+
+
+# In[29]:
+
+
+all_data_95[[1,2,3,4]].sum().plot.bar(figsize=(15,7.5))
+
+
+# In[30]:
+
+
+all_data_95.head(1)
+
+
+# In[31]:
+
+
+all_data_95["Study_Type"].value_counts()
+
+
+# :::{note}
+# Fridberg is the only study that had experiments with participants only having 95 trials.
+# :::
+
+# In[32]:
+
+
+all_data_95["Total"].plot(figsize=(7,5))
+
+
+# As there are only 15 participants it is hard to find anything concrete about the amounts won and lost in these trials from the visualisation
+
+# In[33]:
+
+
+all_data_95["Total"].describe()
+
+
+# In[34]:
+
+
+all_data_95[all_data_95["Total"] <0].shape
+
+
+# 8 of the participants in this trial failed to make any money
+
+# ### Analysis for studies containing 100 participants
+
+# In[35]:
+
+
+all_data_100 = all_data[all_data["No_participants"] == 100]
+
+
+# In[36]:
+
+
+all_data_100[[1,2,3,4]].sum().plot.bar(figsize=(15,7.5))
+
+
+# compare total won and lost for each study
+
+# In[37]:
+
+
+all_data_100[[1,2,3,4]].sum().plot.bar(figsize=(15,7.5))
+
+
+# In[38]:
+
+
+all_data_100.head(1)
+
+
+# In[39]:
+
+
+all_data_100["Total"].describe()
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[40]:
+
+
+all_data_100["Study_Type"].value_counts()
+
+
+# In[41]:
+
+
+all_data_100.groupby("Study_Type")["Total"].sum()
+
+
+# In[42]:
+
+
+all_data_100.groupby("Study_Type")["Total"].sum().plot.bar(figsize=(15,7.5))
+
+
+# In[43]:
+
+
+all_data_100[all_data_100["Study_Type"] == "Wood"]
+
+
+# ### Analysis for studies containing 150 participants
+
+# In[44]:
+
+
+all_data_150 = all_data[all_data["No_participants"] == 150]
+
+
+# In[45]:
+
+
+all_data_150[[1,2,3,4]].sum().plot.bar(figsize=(15,7.5))
+
+
+# Compare total won and lost for each study
+
+# In[46]:
+
+
+all_data_150["Study_Type"].value_counts()
+
+
+# In[47]:
+
+
+all_data_150.groupby("Study_Type")["Total"].sum()
+
+
+# In[48]:
+
+
+all_data_150["Total"].describe()
+
+
+# In[49]:
+
+
+all_data_150.shape
+
+
+# In[50]:
+
+
+len(all_data_150[all_data_150["Total"] > 0])
+
+
+# In the case of 150 participants 62 out of 98 partipants made money.
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[51]:
+
+
+all_data_150.groupby("Study_Type")["Total"].sum().plot.bar(figsize=(15,7.5))
+
+
+# ### Comparing outputs for all 3 trials
+
+# Card deck selection analysis
+
+# In[52]:
+
+
+all_data[[1,2,3,4]].sum()
+
+
+# In[53]:
+
+
+all_data[[1,2,3,4]].sum().plot.bar(figsize=(15,7.5))
+
+
+# :::{note}
+# The distribution of the card selections below is for my understanding.
+# I will need to normalies the card selection figures in the data preparation phase
+# :::
+
+# In[54]:
+
+
+sns.distplot(all_data[1], hist=True, kde=True, 
+             bins=int(180/5), color = 'darkblue', 
+             hist_kws={'edgecolor':'black'},
+             kde_kws={'linewidth': 4})
+
+
+# In[55]:
+
+
+sns.distplot(all_data[2], hist=True, kde=True, 
+             bins=int(180/5), color = 'darkblue', 
+             hist_kws={'edgecolor':'black'},
+             kde_kws={'linewidth': 4})
+
+
+# In[56]:
+
+
+sns.distplot(all_data[3], hist=True, kde=True, 
+             bins=int(180/5), color = 'darkblue', 
+             hist_kws={'edgecolor':'black'},
+             kde_kws={'linewidth': 4})
+
+
+# In[57]:
+
+
+sns.distplot(all_data[4], hist=True, kde=True, 
+             bins=int(180/5), color = 'darkblue', 
+             hist_kws={'edgecolor':'black'},
+             kde_kws={'linewidth': 4})
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[58]:
+
+
+sns.distplot(all_data['Total'], hist=True, kde=True, 
+             bins=int(180/5), color = 'darkblue', 
+             hist_kws={'edgecolor':'black'},
+             kde_kws={'linewidth': 4})
+
+
+# In[59]:
+
+
+sns.distplot(all_data['Amount_won'], hist=True, kde=True, 
+             bins=int(180/5), color = 'darkblue', 
+             hist_kws={'edgecolor':'black'},
+             kde_kws={'linewidth': 4})
+
+
+# In[60]:
+
+
+sns.distplot(all_data['Amount_lost'], hist=True, kde=True, 
+             bins=int(180/5), color = 'darkblue', 
+             hist_kws={'edgecolor':'black'},
+             kde_kws={'linewidth': 4})
+
+
+# From the distribution plot the data for the total won/lost seems to follow a normal distribution
+
+# In[61]:
+
+
+all_data["Total"].describe()
+
+
+# In[ ]:
+
+
+
+
+
+# Correlation coeffecient
+
+# In[62]:
+
+
+plt.figure(figsize=(16, 6))
+heatmap = sns.heatmap(all_data.corr(), vmin=-1, vmax=1, annot=True)
+heatmap.set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12);
+
+
+# In[ ]:
+
+
+
+
+
+# In[63]:
+
+
+all_data.isna().sum().sum()
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# Add Boxplots for totals + amounts won + amounts lost for all data
 # 
-# Join all losses together, add column for what trial they were part of and also add how many partcipants were in that study
+# Look at scatter plot to estimate the number of centroids to set for the k parameter
 
 # In[ ]:
 
@@ -108,22 +658,10 @@ index_95.isna().sum().sum() + index_100.isna().sum().sum() + index_150.isna().su
 
 
 
-# In[ ]:
+# In[64]:
 
 
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
+all_data.head()
 
 
 # In[ ]:
@@ -132,11 +670,9 @@ index_95.isna().sum().sum() + index_100.isna().sum().sum() + index_150.isna().su
 
 
 
-# In[ ]:
+# ### Data Analysis comments
 
-
-
-
+# From my initial analysis it is clear to see that the 1st deck of cards is selected the least.
 
 # In[ ]:
 
@@ -144,26 +680,10 @@ index_95.isna().sum().sum() + index_100.isna().sum().sum() + index_150.isna().su
 
 
 
-# In[ ]:
+# The final step is to export the cleaned data set for data preparation
+
+# In[65]:
 
 
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
+all_data.to_csv('data/all_data.csv')
 

@@ -50,9 +50,23 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Markdown Files" href="markdown.html" />
+    <link rel="next" title="Data Cleaning and Exploration" href="notebooks.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -95,18 +109,13 @@
 </ul>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="markdown.html">
-   Markdown Files
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="notebooks.html">
-   Data Exploration
+   Data Cleaning and Exploration
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="preparation.html">
-   TEST
+  <a class="reference internal" href="data_prep.html">
+   Data preparation for clustering
   </a>
  </li>
 </ul>
@@ -283,7 +292,11 @@ In this study 617 healthy participants, the participants have no neurological im
 </tbody>
 </table>
 <p>A link to the data is available <a class="reference external" href="https://openpsychologydata.metajnl.com/articles/10.5334/jopd.ak/">here</a></p>
-<p>As part of this assignment, k-means clustering will be used on the data sets above.</p>
+<p>As part of this assignment, k-means clustering will be used on the data sets above.
+Clustering is an unsupervised machine learning problem, often used to find interesting patterns in data</p>
+<p>K-means clustering is used to assign examples to clusters in an effort to minimize the variance within each cluster.
+It is used to quickly predict groupings from within an unlabeled dataset.</p>
+<p>Our aim is to model the underlying structure of the data in order to learn from data and identify groups of data (segments/clusters) with similar characteristics/behaviours</p>
 </div>
 <div class="toctree-wrapper compound">
 </div>
@@ -319,10 +332,10 @@ In this study 617 healthy participants, the participants have no neurological im
 <div class='prev-next-bottom'>
     
      <div id="next">
-        <a class="right-next" href="markdown.html" title="next page">
+        <a class="right-next" href="notebooks.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Markdown Files</p>
+                <p class="prevnext-title">Data Cleaning and Exploration</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

@@ -6,6 +6,6 @@ root: intro
 defaults:  # The defaults key will be applied to all chapters and sub-sections
   titlesonly: True
 chapters:
-- file: markdown
 - file: notebooks
+- file: data_prep
 - file: preparation
