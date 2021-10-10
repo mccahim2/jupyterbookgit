@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Data Exploration &#8212; CA4015 Clustering Assignment - Iowa Gambling Task</title>
+    <title>Data Cleaning and Exploration &#8212; CA4015 Clustering Assignment - Iowa Gambling Task</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -64,10 +64,24 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="TEST" href="preparation.html" />
-    <link rel="prev" title="Markdown Files" href="markdown.html" />
+    <link rel="next" title="Data preparation for clustering" href="data_prep.html" />
+    <link rel="prev" title="Introduction" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -109,19 +123,19 @@
  </li>
 </ul>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="markdown.html">
-   Markdown Files
-  </a>
- </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Data Exploration
+   Data Cleaning and Exploration
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="preparation.html">
-   TEST
+  <a class="reference internal" href="data_prep.html">
+   Data preparation for clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="clustering.html">
+   K-Means Clustering
   </a>
  </li>
 </ul>
@@ -243,6 +257,31 @@
    Data Analysis/Exploration
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analysis-for-studies-containing-95-participants">
+   Analysis for studies containing 95 participants
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analysis-for-studies-containing-100-participants">
+   Analysis for studies containing 100 participants
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analysis-for-studies-containing-150-participants">
+   Analysis for studies containing 150 participants
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comparing-outputs-for-all-3-trials">
+   Comparing outputs for all 3 trials
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-analysis-comments">
+   Data Analysis comments
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -254,8 +293,8 @@
         
               <div>
                 
-  <div class="section" id="data-exploration">
-<h1>Data Exploration<a class="headerlink" href="#data-exploration" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="data-cleaning-and-exploration">
+<h1>Data Cleaning and Exploration<a class="headerlink" href="#data-cleaning-and-exploration" title="Permalink to this headline">¶</a></h1>
 <p>The first step of the data exploration phase is to import any necessary packages</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -370,11 +409,1252 @@ They are as follows:</p>
 </div>
 </div>
 <p>There are no null values in the choices data sets</p>
+<p>Due to the large number of data sets, it might make it simpler to join tables based on the number of trials</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Below I am making a new column for each number of trials. The new column shows to total won or lost per person.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_win_95</span> <span class="o">=</span> <span class="n">win_95</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">total_loss_95</span> <span class="o">=</span> <span class="n">loss_95</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">total_95</span> <span class="o">=</span> <span class="n">total_win_95</span> <span class="o">+</span> <span class="n">total_loss_95</span>
+
+<span class="n">total_win_100</span> <span class="o">=</span> <span class="n">win_100</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">total_loss_100</span> <span class="o">=</span> <span class="n">loss_100</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">total_100</span> <span class="o">=</span> <span class="n">total_win_100</span> <span class="o">+</span> <span class="n">total_loss_100</span>
+
+<span class="n">total_win_150</span> <span class="o">=</span> <span class="n">win_150</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">total_loss_150</span> <span class="o">=</span> <span class="n">loss_150</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">total_150</span> <span class="o">=</span> <span class="n">total_win_150</span> <span class="o">+</span> <span class="n">total_loss_150</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Making totals into pandas dataframes for further analysis</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_95</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">total_95</span><span class="p">)</span>
+<span class="n">total_95</span> <span class="o">=</span> <span class="n">total_95</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;Total&#39;</span><span class="p">})</span>
+
+<span class="n">total_100</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">total_100</span><span class="p">)</span>
+<span class="n">total_100</span> <span class="o">=</span> <span class="n">total_100</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;Total&#39;</span><span class="p">})</span>
+
+<span class="n">total_150</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">total_150</span><span class="p">)</span>
+<span class="n">total_150</span> <span class="o">=</span> <span class="n">total_150</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;Total&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Adding Study Names to the totals column</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_95</span><span class="p">[</span><span class="s2">&quot;Study_Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">index_95</span><span class="p">[</span><span class="s2">&quot;Study&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">total_100</span><span class="p">[</span><span class="s2">&quot;Study_Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">index_100</span><span class="p">[</span><span class="s2">&quot;Study&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">total_150</span><span class="p">[</span><span class="s2">&quot;Study_Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">index_150</span><span class="p">[</span><span class="s2">&quot;Study&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Adding column for number of participants in the trial</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_95</span><span class="p">[</span><span class="s2">&quot;No_participants&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">95</span>
+<span class="n">total_100</span><span class="p">[</span><span class="s2">&quot;No_participants&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">total_150</span><span class="p">[</span><span class="s2">&quot;No_participants&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Adding total won and total lost per player over the course of the task</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_95</span><span class="p">[</span><span class="s2">&quot;Amount_won&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">win_95</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">total_95</span><span class="p">[</span><span class="s2">&quot;Amount_lost&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">loss_95</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">total_100</span><span class="p">[</span><span class="s2">&quot;Amount_won&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">win_100</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">total_100</span><span class="p">[</span><span class="s2">&quot;Amount_lost&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">loss_100</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">total_150</span><span class="p">[</span><span class="s2">&quot;Amount_won&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">win_150</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">total_150</span><span class="p">[</span><span class="s2">&quot;Amount_lost&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">loss_150</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Adding choice of cards into each data frame</p>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.value_counts.html">Pandas series</a>, returns a Series containing counts of unique values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_choice_95</span> <span class="o">=</span> <span class="n">choice_95</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="o">.</span><span class="n">value_counts</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">total_choice_100</span> <span class="o">=</span> <span class="n">choice_100</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="o">.</span><span class="n">value_counts</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">total_choice_150</span> <span class="o">=</span> <span class="n">choice_150</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="o">.</span><span class="n">value_counts</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">total_choices</span> <span class="o">=</span> <span class="n">total_choice_95</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total_choice_100</span><span class="p">)</span>
+<span class="n">total_choices</span> <span class="o">=</span> <span class="n">total_choices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total_choice_150</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_choices</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(617, 4)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Showing the number of columns in the new datasets shows that no rows have been lost</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_95</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span><span class="n">total_150</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">total_100</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>617
+</pre></div>
+</div>
+</div>
+</div>
+<p>Showing the number of columns in the new datasets shows that no rows have been lost</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_95</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span><span class="n">total_150</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">total_100</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>617
+</pre></div>
+</div>
+</div>
+</div>
+<p>Joining all the totals datasets together</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">totals</span> <span class="o">=</span> <span class="n">total_95</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total_100</span><span class="p">)</span>
+<span class="n">totals</span> <span class="o">=</span> <span class="n">totals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total_150</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">totals</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(617, 5)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The last step of the data cleaning process is to join thte totals dataframe to the total_choices data frame</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">totals</span><span class="p">,</span> <span class="n">total_choices</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">all_data</span> <span class="o">=</span> <span class="n">all_data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(617, 9)
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="data-analysis-exploration">
 <h2>Data Analysis/Exploration<a class="headerlink" href="#data-analysis-exploration" title="Permalink to this headline">¶</a></h2>
-<p>Join all wins together, add column for what trial they were part of and also add how many partcipants were in that study</p>
-<p>Join all losses together, add column for what trial they were part of and also add how many partcipants were in that study</p>
+<p>Analysing the wins and losses for each number of trials</p>
+<p>Seaborn and Matplotlib will be used to visualise the data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total</th>
+      <th>Study_Type</th>
+      <th>No_participants</th>
+      <th>Amount_won</th>
+      <th>Amount_lost</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Subj_1</th>
+      <td>1150</td>
+      <td>Fridberg</td>
+      <td>95</td>
+      <td>5800</td>
+      <td>-4650</td>
+      <td>12.0</td>
+      <td>9.0</td>
+      <td>3.0</td>
+      <td>71.0</td>
+    </tr>
+    <tr>
+      <th>Subj_2</th>
+      <td>-675</td>
+      <td>Fridberg</td>
+      <td>95</td>
+      <td>7250</td>
+      <td>-7925</td>
+      <td>24.0</td>
+      <td>26.0</td>
+      <td>12.0</td>
+      <td>33.0</td>
+    </tr>
+    <tr>
+      <th>Subj_3</th>
+      <td>-750</td>
+      <td>Fridberg</td>
+      <td>95</td>
+      <td>7100</td>
+      <td>-7850</td>
+      <td>12.0</td>
+      <td>35.0</td>
+      <td>10.0</td>
+      <td>38.0</td>
+    </tr>
+    <tr>
+      <th>Subj_4</th>
+      <td>-525</td>
+      <td>Fridberg</td>
+      <td>95</td>
+      <td>7000</td>
+      <td>-7525</td>
+      <td>11.0</td>
+      <td>34.0</td>
+      <td>12.0</td>
+      <td>38.0</td>
+    </tr>
+    <tr>
+      <th>Subj_5</th>
+      <td>100</td>
+      <td>Fridberg</td>
+      <td>95</td>
+      <td>6450</td>
+      <td>-6350</td>
+      <td>10.0</td>
+      <td>24.0</td>
+      <td>15.0</td>
+      <td>46.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Descriptive statistics for the Total column.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data</span><span class="p">[</span><span class="s2">&quot;Total&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count     617.000000
+mean     -156.831442
+std      1251.585443
+min     -4250.000000
+25%     -1000.000000
+50%      -170.000000
+75%       650.000000
+max      3750.000000
+Name: Total, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data</span><span class="p">[</span><span class="n">all_data</span><span class="p">[</span><span class="s2">&quot;Total&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(333, 9)
+</pre></div>
+</div>
+</div>
+</div>
+<p>333 of the participants of these experiments lost money</p>
+<p>Now I will check a comparison of wins vs losses for each type of study (95 participants, 100 participants and 150 participants)</p>
+</div>
+<div class="section" id="analysis-for-studies-containing-95-participants">
+<h2>Analysis for studies containing 95 participants<a class="headerlink" href="#analysis-for-studies-containing-95-participants" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_95</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[</span><span class="n">all_data</span><span class="p">[</span><span class="s2">&quot;No_participants&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">95</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_95</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1    187.0
+2    425.0
+3    194.0
+4    619.0
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_95</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mf">7.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4d31f890&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_58_1.png" src="_images/notebooks_58_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_95</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total</th>
+      <th>Study_Type</th>
+      <th>No_participants</th>
+      <th>Amount_won</th>
+      <th>Amount_lost</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Subj_1</th>
+      <td>1150</td>
+      <td>Fridberg</td>
+      <td>95</td>
+      <td>5800</td>
+      <td>-4650</td>
+      <td>12.0</td>
+      <td>9.0</td>
+      <td>3.0</td>
+      <td>71.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_95</span><span class="p">[</span><span class="s2">&quot;Study_Type&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fridberg    15
+Name: Study_Type, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Fridberg is the only study that had experiments with participants only having 95 trials.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_95</span><span class="p">[</span><span class="s2">&quot;Total&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4a9619d0&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_62_1.png" src="_images/notebooks_62_1.png" />
+</div>
+</div>
+<p>As there are only 15 participants it is hard to find anything concrete about the amounts won and lost in these trials from the visualisation</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_95</span><span class="p">[</span><span class="s2">&quot;Total&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count      15.000000
+mean       83.333333
+std       729.460825
+min      -750.000000
+25%      -475.000000
+50%      -150.000000
+75%       450.000000
+max      1475.000000
+Name: Total, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_95</span><span class="p">[</span><span class="n">all_data_95</span><span class="p">[</span><span class="s2">&quot;Total&quot;</span><span class="p">]</span> <span class="o">&lt;</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(8, 9)
+</pre></div>
+</div>
+</div>
+</div>
+<p>8 of the participants in this trial failed to make any money</p>
+</div>
+<div class="section" id="analysis-for-studies-containing-100-participants">
+<h2>Analysis for studies containing 100 participants<a class="headerlink" href="#analysis-for-studies-containing-100-participants" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_100</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[</span><span class="n">all_data</span><span class="p">[</span><span class="s2">&quot;No_participants&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">100</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_100</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mf">7.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4a75d2d0&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_69_1.png" src="_images/notebooks_69_1.png" />
+</div>
+</div>
+<p>compare total won and lost for each study</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_100</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mf">7.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4a6fc050&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_71_1.png" src="_images/notebooks_71_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_100</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total</th>
+      <th>Study_Type</th>
+      <th>No_participants</th>
+      <th>Amount_won</th>
+      <th>Amount_lost</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Subj_1</th>
+      <td>-1800</td>
+      <td>Horstmann</td>
+      <td>100</td>
+      <td>8150</td>
+      <td>-9950</td>
+      <td>21.0</td>
+      <td>42.0</td>
+      <td>15.0</td>
+      <td>22.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_100</span><span class="p">[</span><span class="s2">&quot;Total&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count     504.000000
+mean     -266.994048
+std      1178.585955
+min     -4250.000000
+25%     -1050.000000
+50%      -300.000000
+75%       550.000000
+max      3570.000000
+Name: Total, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_100</span><span class="p">[</span><span class="s2">&quot;Study_Type&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Horstmann            162
+Wood                 153
+SteingroverInPrep     70
+Maia                  40
+Worthy                35
+Premkumar             25
+Kjome                 19
+Name: Study_Type, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_100</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Study_Type&quot;</span><span class="p">)[</span><span class="s2">&quot;Total&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Study_Type
+Horstmann             -6200
+Kjome                 -8750
+Maia                  13600
+Premkumar              5995
+SteingroverInPrep     -4700
+Wood                -119410
+Worthy               -15100
+Name: Total, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_100</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Study_Type&quot;</span><span class="p">)[</span><span class="s2">&quot;Total&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mf">7.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4a67d610&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_76_1.png" src="_images/notebooks_76_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_100</span><span class="p">[</span><span class="n">all_data_100</span><span class="p">[</span><span class="s2">&quot;Study_Type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Wood&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total</th>
+      <th>Study_Type</th>
+      <th>No_participants</th>
+      <th>Amount_won</th>
+      <th>Amount_lost</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Subj_317</th>
+      <td>-320</td>
+      <td>Wood</td>
+      <td>100</td>
+      <td>8080</td>
+      <td>-8400</td>
+      <td>19.0</td>
+      <td>30.0</td>
+      <td>25.0</td>
+      <td>26.0</td>
+    </tr>
+    <tr>
+      <th>Subj_318</th>
+      <td>-1030</td>
+      <td>Wood</td>
+      <td>100</td>
+      <td>8870</td>
+      <td>-9900</td>
+      <td>17.0</td>
+      <td>43.0</td>
+      <td>20.0</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <th>Subj_319</th>
+      <td>-1850</td>
+      <td>Wood</td>
+      <td>100</td>
+      <td>8450</td>
+      <td>-10300</td>
+      <td>20.0</td>
+      <td>35.0</td>
+      <td>21.0</td>
+      <td>24.0</td>
+    </tr>
+    <tr>
+      <th>Subj_320</th>
+      <td>-775</td>
+      <td>Wood</td>
+      <td>100</td>
+      <td>8150</td>
+      <td>-8925</td>
+      <td>22.0</td>
+      <td>28.0</td>
+      <td>24.0</td>
+      <td>26.0</td>
+    </tr>
+    <tr>
+      <th>Subj_321</th>
+      <td>-1600</td>
+      <td>Wood</td>
+      <td>100</td>
+      <td>8250</td>
+      <td>-9850</td>
+      <td>16.0</td>
+      <td>35.0</td>
+      <td>19.0</td>
+      <td>30.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>Subj_465</th>
+      <td>2400</td>
+      <td>Wood</td>
+      <td>100</td>
+      <td>6600</td>
+      <td>-4200</td>
+      <td>5.0</td>
+      <td>10.0</td>
+      <td>25.0</td>
+      <td>60.0</td>
+    </tr>
+    <tr>
+      <th>Subj_466</th>
+      <td>-1035</td>
+      <td>Wood</td>
+      <td>100</td>
+      <td>8190</td>
+      <td>-9225</td>
+      <td>25.0</td>
+      <td>27.0</td>
+      <td>23.0</td>
+      <td>25.0</td>
+    </tr>
+    <tr>
+      <th>Subj_467</th>
+      <td>-2375</td>
+      <td>Wood</td>
+      <td>100</td>
+      <td>8975</td>
+      <td>-11350</td>
+      <td>12.0</td>
+      <td>47.0</td>
+      <td>19.0</td>
+      <td>22.0</td>
+    </tr>
+    <tr>
+      <th>Subj_468</th>
+      <td>1390</td>
+      <td>Wood</td>
+      <td>100</td>
+      <td>6940</td>
+      <td>-5550</td>
+      <td>5.0</td>
+      <td>16.0</td>
+      <td>19.0</td>
+      <td>60.0</td>
+    </tr>
+    <tr>
+      <th>Subj_469</th>
+      <td>-2235</td>
+      <td>Wood</td>
+      <td>100</td>
+      <td>8290</td>
+      <td>-10525</td>
+      <td>21.0</td>
+      <td>32.0</td>
+      <td>29.0</td>
+      <td>18.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>153 rows × 9 columns</p>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="analysis-for-studies-containing-150-participants">
+<h2>Analysis for studies containing 150 participants<a class="headerlink" href="#analysis-for-studies-containing-150-participants" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_150</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[</span><span class="n">all_data</span><span class="p">[</span><span class="s2">&quot;No_participants&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">150</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_150</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mf">7.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4a5ffb90&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_80_1.png" src="_images/notebooks_80_1.png" />
+</div>
+</div>
+<p>Compare total won and lost for each study</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_150</span><span class="p">[</span><span class="s2">&quot;Study_Type&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Steingroever2011    57
+Wetzels             41
+Name: Study_Type, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_150</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Study_Type&quot;</span><span class="p">)[</span><span class="s2">&quot;Total&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Study_Type
+Steingroever2011    12550
+Wetzels             24000
+Name: Total, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_150</span><span class="p">[</span><span class="s2">&quot;Total&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count      98.000000
+mean      372.959184
+std      1520.668063
+min     -4200.000000
+25%      -500.000000
+50%       350.000000
+75%      1450.000000
+max      3750.000000
+Name: Total, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_150</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(98, 9)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">all_data_150</span><span class="p">[</span><span class="n">all_data_150</span><span class="p">[</span><span class="s2">&quot;Total&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>62
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the case of 150 participants 62 out of 98 partipants made money.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data_150</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Study_Type&quot;</span><span class="p">)[</span><span class="s2">&quot;Total&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mf">7.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4ab9bed0&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_88_1.png" src="_images/notebooks_88_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="comparing-outputs-for-all-3-trials">
+<h2>Comparing outputs for all 3 trials<a class="headerlink" href="#comparing-outputs-for-all-3-trials" title="Permalink to this headline">¶</a></h2>
+<p>Card deck selection analysis</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1     9757.0
+2    20601.0
+3    16240.0
+4    19927.0
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mf">7.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4ab66450&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_92_1.png" src="_images/notebooks_92_1.png" />
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The distribution of the card selections below is for my understanding.
+I will need to normalies the card selection figures in the data preparation phase</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">all_data</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">hist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+             <span class="n">bins</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">180</span><span class="o">/</span><span class="mi">5</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;darkblue&#39;</span><span class="p">,</span> 
+             <span class="n">hist_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;edgecolor&#39;</span><span class="p">:</span><span class="s1">&#39;black&#39;</span><span class="p">},</span>
+             <span class="n">kde_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;linewidth&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/michael/anaconda3/lib/python3.7/site-packages/seaborn/distributions.py:2551: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
+  warnings.warn(msg, FutureWarning)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4aaadb10&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_94_2.png" src="_images/notebooks_94_2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">all_data</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">hist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+             <span class="n">bins</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">180</span><span class="o">/</span><span class="mi">5</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;darkblue&#39;</span><span class="p">,</span> 
+             <span class="n">hist_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;edgecolor&#39;</span><span class="p">:</span><span class="s1">&#39;black&#39;</span><span class="p">},</span>
+             <span class="n">kde_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;linewidth&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/michael/anaconda3/lib/python3.7/site-packages/seaborn/distributions.py:2551: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
+  warnings.warn(msg, FutureWarning)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4a562f10&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_95_2.png" src="_images/notebooks_95_2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">all_data</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">hist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+             <span class="n">bins</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">180</span><span class="o">/</span><span class="mi">5</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;darkblue&#39;</span><span class="p">,</span> 
+             <span class="n">hist_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;edgecolor&#39;</span><span class="p">:</span><span class="s1">&#39;black&#39;</span><span class="p">},</span>
+             <span class="n">kde_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;linewidth&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/michael/anaconda3/lib/python3.7/site-packages/seaborn/distributions.py:2551: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
+  warnings.warn(msg, FutureWarning)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4ab667d0&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_96_2.png" src="_images/notebooks_96_2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">all_data</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">hist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+             <span class="n">bins</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">180</span><span class="o">/</span><span class="mi">5</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;darkblue&#39;</span><span class="p">,</span> 
+             <span class="n">hist_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;edgecolor&#39;</span><span class="p">:</span><span class="s1">&#39;black&#39;</span><span class="p">},</span>
+             <span class="n">kde_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;linewidth&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/michael/anaconda3/lib/python3.7/site-packages/seaborn/distributions.py:2551: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
+  warnings.warn(msg, FutureWarning)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f463f2e50&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_97_2.png" src="_images/notebooks_97_2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">all_data</span><span class="p">[</span><span class="s1">&#39;Total&#39;</span><span class="p">],</span> <span class="n">hist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+             <span class="n">bins</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">180</span><span class="o">/</span><span class="mi">5</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;darkblue&#39;</span><span class="p">,</span> 
+             <span class="n">hist_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;edgecolor&#39;</span><span class="p">:</span><span class="s1">&#39;black&#39;</span><span class="p">},</span>
+             <span class="n">kde_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;linewidth&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/michael/anaconda3/lib/python3.7/site-packages/seaborn/distributions.py:2551: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
+  warnings.warn(msg, FutureWarning)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f461cb790&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_98_2.png" src="_images/notebooks_98_2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">all_data</span><span class="p">[</span><span class="s1">&#39;Amount_won&#39;</span><span class="p">],</span> <span class="n">hist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+             <span class="n">bins</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">180</span><span class="o">/</span><span class="mi">5</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;darkblue&#39;</span><span class="p">,</span> 
+             <span class="n">hist_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;edgecolor&#39;</span><span class="p">:</span><span class="s1">&#39;black&#39;</span><span class="p">},</span>
+             <span class="n">kde_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;linewidth&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/michael/anaconda3/lib/python3.7/site-packages/seaborn/distributions.py:2551: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
+  warnings.warn(msg, FutureWarning)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f46163950&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_99_2.png" src="_images/notebooks_99_2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">all_data</span><span class="p">[</span><span class="s1">&#39;Amount_lost&#39;</span><span class="p">],</span> <span class="n">hist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+             <span class="n">bins</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">180</span><span class="o">/</span><span class="mi">5</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;darkblue&#39;</span><span class="p">,</span> 
+             <span class="n">hist_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;edgecolor&#39;</span><span class="p">:</span><span class="s1">&#39;black&#39;</span><span class="p">},</span>
+             <span class="n">kde_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;linewidth&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/michael/anaconda3/lib/python3.7/site-packages/seaborn/distributions.py:2551: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
+  warnings.warn(msg, FutureWarning)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f46137d90&gt;
+</pre></div>
+</div>
+<img alt="_images/notebooks_100_2.png" src="_images/notebooks_100_2.png" />
+</div>
+</div>
+<p>From the distribution plot the data for the total won/lost seems to follow a normal distribution</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data</span><span class="p">[</span><span class="s2">&quot;Total&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count     617.000000
+mean     -156.831442
+std      1251.585443
+min     -4250.000000
+25%     -1000.000000
+50%      -170.000000
+75%       650.000000
+max      3750.000000
+Name: Total, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Add Boxplots for totals + amounts won + amounts lost for all data</p>
+<p>Look at scatter plot to estimate the number of centroids to set for the k parameter</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total</th>
+      <th>Study_Type</th>
+      <th>No_participants</th>
+      <th>Amount_won</th>
+      <th>Amount_lost</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Subj_1</th>
+      <td>1150</td>
+      <td>Fridberg</td>
+      <td>95</td>
+      <td>5800</td>
+      <td>-4650</td>
+      <td>12.0</td>
+      <td>9.0</td>
+      <td>3.0</td>
+      <td>71.0</td>
+    </tr>
+    <tr>
+      <th>Subj_2</th>
+      <td>-675</td>
+      <td>Fridberg</td>
+      <td>95</td>
+      <td>7250</td>
+      <td>-7925</td>
+      <td>24.0</td>
+      <td>26.0</td>
+      <td>12.0</td>
+      <td>33.0</td>
+    </tr>
+    <tr>
+      <th>Subj_3</th>
+      <td>-750</td>
+      <td>Fridberg</td>
+      <td>95</td>
+      <td>7100</td>
+      <td>-7850</td>
+      <td>12.0</td>
+      <td>35.0</td>
+      <td>10.0</td>
+      <td>38.0</td>
+    </tr>
+    <tr>
+      <th>Subj_4</th>
+      <td>-525</td>
+      <td>Fridberg</td>
+      <td>95</td>
+      <td>7000</td>
+      <td>-7525</td>
+      <td>11.0</td>
+      <td>34.0</td>
+      <td>12.0</td>
+      <td>38.0</td>
+    </tr>
+    <tr>
+      <th>Subj_5</th>
+      <td>100</td>
+      <td>Fridberg</td>
+      <td>95</td>
+      <td>6450</td>
+      <td>-6350</td>
+      <td>10.0</td>
+      <td>24.0</td>
+      <td>15.0</td>
+      <td>46.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="data-analysis-comments">
+<h2>Data Analysis comments<a class="headerlink" href="#data-analysis-comments" title="Permalink to this headline">¶</a></h2>
+<p>From my initial analysis it is clear to see that the 1st deck of cards is selected the least.</p>
+<p>The final step is to export the cleaned data set for data preparation</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data/all_data.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 
@@ -408,19 +1688,19 @@ They are as follows:</p>
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="markdown.html" title="previous page">
+        <a class="left-prev" href="intro.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Markdown Files</p>
+                <p class="prevnext-title">Introduction</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="preparation.html" title="next page">
+        <a class="right-next" href="data_prep.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">TEST</p>
+                <p class="prevnext-title">Data preparation for clustering</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
