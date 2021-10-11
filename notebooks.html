@@ -43,6 +43,8 @@
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -309,7 +311,7 @@ There are 12 data sets to read in.
 They are as follows:</p>
 <ul class="simple">
 <li><p><strong>Wins:</strong> These data sets show how much money participants win during each part of the trial</p></li>
-<li><p><strong>Losses:</strong> These data sets show how much money participants lose during each part of the trial</p></li>
+<li><p><strong>Losses:</strong> These data sets show how much, “Amount_lost”, “Amount_won”h money participants lose during each part of the trial</p></li>
 <li><p><strong>Choice:</strong> These data sets indicate what deck participants chose during each part of the trial</p></li>
 <li><p><strong>Index:</strong> These data sets contain the name of the first author of the study that reports the data of the corresponding participant.</p></li>
 </ul>
@@ -759,7 +761,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4d31f890&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f20ea987850&gt;
 </pre></div>
 </div>
 <img alt="_images/notebooks_58_1.png" src="_images/notebooks_58_1.png" />
@@ -842,7 +844,7 @@ Name: Study_Type, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4a9619d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f20e777dfd0&gt;
 </pre></div>
 </div>
 <img alt="_images/notebooks_62_1.png" src="_images/notebooks_62_1.png" />
@@ -882,6 +884,7 @@ Name: Total, dtype: float64
 </div>
 </div>
 <p>8 of the participants in this trial failed to make any money</p>
+<p>With participants in this study with 95 trials it is difficult to come to any conclusions due to the fact that there are simply not enough participants.</p>
 </div>
 <div class="section" id="analysis-for-studies-containing-100-participants">
 <h2>Analysis for studies containing 100 participants<a class="headerlink" href="#analysis-for-studies-containing-100-participants" title="Permalink to this headline">¶</a></h2>
@@ -899,10 +902,10 @@ Name: Total, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4a75d2d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f20e75840d0&gt;
 </pre></div>
 </div>
-<img alt="_images/notebooks_69_1.png" src="_images/notebooks_69_1.png" />
+<img alt="_images/notebooks_70_1.png" src="_images/notebooks_70_1.png" />
 </div>
 </div>
 <p>compare total won and lost for each study</p>
@@ -913,10 +916,10 @@ Name: Total, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4a6fc050&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f20e75088d0&gt;
 </pre></div>
 </div>
-<img alt="_images/notebooks_71_1.png" src="_images/notebooks_71_1.png" />
+<img alt="_images/notebooks_72_1.png" src="_images/notebooks_72_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1038,10 +1041,10 @@ Name: Total, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4a67d610&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f20e74a2f90&gt;
 </pre></div>
 </div>
-<img alt="_images/notebooks_76_1.png" src="_images/notebooks_76_1.png" />
+<img alt="_images/notebooks_77_1.png" src="_images/notebooks_77_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1235,10 +1238,10 @@ Name: Total, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4a5ffb90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f20e73fbcd0&gt;
 </pre></div>
 </div>
-<img alt="_images/notebooks_80_1.png" src="_images/notebooks_80_1.png" />
+<img alt="_images/notebooks_81_1.png" src="_images/notebooks_81_1.png" />
 </div>
 </div>
 <p>Compare total won and lost for each study</p>
@@ -1323,10 +1326,10 @@ Name: Total, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4ab9bed0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f20e79c1f50&gt;
 </pre></div>
 </div>
-<img alt="_images/notebooks_88_1.png" src="_images/notebooks_88_1.png" />
+<img alt="_images/notebooks_89_1.png" src="_images/notebooks_89_1.png" />
 </div>
 </div>
 </div>
@@ -1356,10 +1359,10 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4ab66450&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f20e799f810&gt;
 </pre></div>
 </div>
-<img alt="_images/notebooks_92_1.png" src="_images/notebooks_92_1.png" />
+<img alt="_images/notebooks_93_1.png" src="_images/notebooks_93_1.png" />
 </div>
 </div>
 <div class="admonition note">
@@ -1381,10 +1384,10 @@ I will need to normalies the card selection figures in the data preparation phas
   warnings.warn(msg, FutureWarning)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4aaadb10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f20e78d69d0&gt;
 </pre></div>
 </div>
-<img alt="_images/notebooks_94_2.png" src="_images/notebooks_94_2.png" />
+<img alt="_images/notebooks_95_2.png" src="_images/notebooks_95_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1401,10 +1404,10 @@ I will need to normalies the card selection figures in the data preparation phas
   warnings.warn(msg, FutureWarning)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4a562f10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f20e7897710&gt;
 </pre></div>
 </div>
-<img alt="_images/notebooks_95_2.png" src="_images/notebooks_95_2.png" />
+<img alt="_images/notebooks_96_2.png" src="_images/notebooks_96_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1421,10 +1424,10 @@ I will need to normalies the card selection figures in the data preparation phas
   warnings.warn(msg, FutureWarning)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f4ab667d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f20e73883d0&gt;
 </pre></div>
 </div>
-<img alt="_images/notebooks_96_2.png" src="_images/notebooks_96_2.png" />
+<img alt="_images/notebooks_97_2.png" src="_images/notebooks_97_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1441,10 +1444,10 @@ I will need to normalies the card selection figures in the data preparation phas
   warnings.warn(msg, FutureWarning)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f463f2e50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f20e3160550&gt;
 </pre></div>
 </div>
-<img alt="_images/notebooks_97_2.png" src="_images/notebooks_97_2.png" />
+<img alt="_images/notebooks_98_2.png" src="_images/notebooks_98_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1461,10 +1464,10 @@ I will need to normalies the card selection figures in the data preparation phas
   warnings.warn(msg, FutureWarning)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f461cb790&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f20e30f5610&gt;
 </pre></div>
 </div>
-<img alt="_images/notebooks_98_2.png" src="_images/notebooks_98_2.png" />
+<img alt="_images/notebooks_99_2.png" src="_images/notebooks_99_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1481,10 +1484,10 @@ I will need to normalies the card selection figures in the data preparation phas
   warnings.warn(msg, FutureWarning)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f46163950&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f20e306b750&gt;
 </pre></div>
 </div>
-<img alt="_images/notebooks_99_2.png" src="_images/notebooks_99_2.png" />
+<img alt="_images/notebooks_100_2.png" src="_images/notebooks_100_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1501,10 +1504,10 @@ I will need to normalies the card selection figures in the data preparation phas
   warnings.warn(msg, FutureWarning)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f1f46137d90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f20e2e87fd0&gt;
 </pre></div>
 </div>
-<img alt="_images/notebooks_100_2.png" src="_images/notebooks_100_2.png" />
+<img alt="_images/notebooks_101_2.png" src="_images/notebooks_101_2.png" />
 </div>
 </div>
 <p>From the distribution plot the data for the total won/lost seems to follow a normal distribution</p>
