@@ -16,7 +16,7 @@ import numpy as np
 # There are 12 data sets to read in.
 # They are as follows:
 # * **Wins:** These data sets show how much money participants win during each part of the trial
-# * **Losses:** These data sets show how much money participants lose during each part of the trial
+# * **Losses:** These data sets show how much, "Amount_lost", "Amount_won"h money participants lose during each part of the trial
 # * **Choice:** These data sets indicate what deck participants chose during each part of the trial
 # * **Index:** These data sets contain the name of the first author of the study that reports the data of the corresponding participant.
 
@@ -332,6 +332,8 @@ all_data_95[all_data_95["Total"] <0].shape
 
 # 8 of the participants in this trial failed to make any money
 
+# With participants in this study with 95 trials it is difficult to come to any conclusions due to the fact that there are simply not enough participants.
+
 # ### Analysis for studies containing 100 participants
 
 # In[35]:
@@ -364,24 +366,6 @@ all_data_100.head(1)
 
 
 all_data_100["Total"].describe()
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
 
 
 # In[40]:
@@ -456,24 +440,6 @@ len(all_data_150[all_data_150["Total"] > 0])
 
 # In the case of 150 participants 62 out of 98 partipants made money.
 
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
 # In[51]:
 
 
@@ -537,30 +503,6 @@ sns.distplot(all_data[4], hist=True, kde=True,
              kde_kws={'linewidth': 4})
 
 
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
 # In[58]:
 
 
@@ -596,78 +538,20 @@ sns.distplot(all_data['Amount_lost'], hist=True, kde=True,
 all_data["Total"].describe()
 
 
-# In[ ]:
-
-
-
-
-
-# Correlation coeffecient
-
 # In[62]:
 
 
-plt.figure(figsize=(16, 6))
-heatmap = sns.heatmap(all_data.corr(), vmin=-1, vmax=1, annot=True)
-heatmap.set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12);
-
-
-# In[ ]:
-
-
-
-
-
-# In[63]:
-
-
 all_data.isna().sum().sum()
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
 
 
 # Add Boxplots for totals + amounts won + amounts lost for all data
 # 
 # Look at scatter plot to estimate the number of centroids to set for the k parameter
 
-# In[ ]:
-
-
-
-
-
-# In[64]:
+# In[63]:
 
 
 all_data.head()
-
-
-# In[ ]:
-
-
-
 
 
 # ### Data Analysis comments
@@ -682,7 +566,7 @@ all_data.head()
 
 # The final step is to export the cleaned data set for data preparation
 
-# In[65]:
+# In[64]:
 
 
 all_data.to_csv('data/all_data.csv')

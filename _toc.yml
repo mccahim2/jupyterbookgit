@@ -9,3 +9,4 @@ chapters:
 - file: notebooks
 - file: data_prep
 - file: preparation
+- file: clustering
