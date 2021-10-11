@@ -54,6 +54,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="kmeansvariation.html" />
     <link rel="prev" title="Data preparation for clustering" href="data_prep.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -109,6 +110,11 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    K-Means Clustering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="conclusion.html">
+   Conclusions
   </a>
  </li>
 </ul>
@@ -168,11 +174,11 @@
         aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
-            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+            href="https://github.com/mccahim2/jupyterbookgit"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fclustering.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/mccahim2/jupyterbookgit/issues/new?title=Issue%20on%20page%20%2Fclustering.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -193,7 +199,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/clustering.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/mccahim2/jupyterbookgit/gh-pages?urlpath=tree/clustering.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -221,13 +227,13 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#methods-for-finding-k-value">
-   Methods for finding K Value
+  <a class="reference internal nav-link" href="#pca">
+   PCA
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#main-cluster-analysis">
-   Main Cluster Analysis
+  <a class="reference internal nav-link" href="#methods-for-finding-k-value">
+   Methods for finding K Value
   </a>
  </li>
 </ul>
@@ -256,6 +262,7 @@
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">silhouette_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
@@ -290,6 +297,7 @@
     <tr style="text-align: right;">
       <th></th>
       <th>Total</th>
+      <th>Study_Type</th>
       <th>No_participants</th>
       <th>Amount_won</th>
       <th>Amount_lost</th>
@@ -297,123 +305,68 @@
       <th>2</th>
       <th>3</th>
       <th>4</th>
-      <th>Study_Type_Fridberg</th>
-      <th>Study_Type_Horstmann</th>
-      <th>Study_Type_Kjome</th>
-      <th>Study_Type_Maia</th>
-      <th>Study_Type_Premkumar</th>
-      <th>Study_Type_Steingroever2011</th>
-      <th>Study_Type_SteingroverInPrep</th>
-      <th>Study_Type_Wetzels</th>
-      <th>Study_Type_Wood</th>
-      <th>Study_Type_Worthy</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.675000</td>
-      <td>95</td>
-      <td>0.052910</td>
-      <td>0.880249</td>
-      <td>0.250000</td>
-      <td>0.062937</td>
-      <td>0.013423</td>
-      <td>0.525926</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>1.044988</td>
+      <td>-1.607073</td>
+      <td>-0.698836</td>
+      <td>-1.471413</td>
+      <td>1.525683</td>
+      <td>-0.477115</td>
+      <td>-1.386904</td>
+      <td>-1.089197</td>
+      <td>2.131753</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.446875</td>
-      <td>95</td>
-      <td>0.206349</td>
-      <td>0.676516</td>
-      <td>0.500000</td>
-      <td>0.181818</td>
-      <td>0.073826</td>
-      <td>0.244444</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>-0.414346</td>
+      <td>-1.607073</td>
+      <td>-0.698836</td>
+      <td>-0.538613</td>
+      <td>0.135451</td>
+      <td>1.024186</td>
+      <td>-0.420182</td>
+      <td>-0.668854</td>
+      <td>0.038743</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.437500</td>
-      <td>95</td>
-      <td>0.190476</td>
-      <td>0.681182</td>
-      <td>0.250000</td>
-      <td>0.244755</td>
-      <td>0.060403</td>
-      <td>0.281481</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>-0.474318</td>
+      <td>-1.607073</td>
+      <td>-0.698836</td>
+      <td>-0.635110</td>
+      <td>0.167288</td>
+      <td>-0.477115</td>
+      <td>0.091612</td>
+      <td>-0.762264</td>
+      <td>0.314139</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.465625</td>
-      <td>95</td>
-      <td>0.179894</td>
-      <td>0.701400</td>
-      <td>0.229167</td>
-      <td>0.237762</td>
-      <td>0.073826</td>
-      <td>0.281481</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>-0.294400</td>
+      <td>-1.607073</td>
+      <td>-0.698836</td>
+      <td>-0.699441</td>
+      <td>0.305250</td>
+      <td>-0.602224</td>
+      <td>0.034746</td>
+      <td>-0.668854</td>
+      <td>0.314139</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.543750</td>
-      <td>95</td>
-      <td>0.121693</td>
-      <td>0.774495</td>
-      <td>0.208333</td>
-      <td>0.167832</td>
-      <td>0.093960</td>
-      <td>0.340741</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>0.205371</td>
+      <td>-1.607073</td>
+      <td>-0.698836</td>
+      <td>-1.053262</td>
+      <td>0.804036</td>
+      <td>-0.727332</td>
+      <td>-0.533914</td>
+      <td>-0.528740</td>
+      <td>0.754773</td>
     </tr>
   </tbody>
 </table>
@@ -445,6 +398,7 @@
     <tr style="text-align: right;">
       <th></th>
       <th>Total</th>
+      <th>Study_Type</th>
       <th>No_participants</th>
       <th>Amount_won</th>
       <th>Amount_lost</th>
@@ -452,371 +406,72 @@
       <th>2</th>
       <th>3</th>
       <th>4</th>
-      <th>Study_Type_Fridberg</th>
-      <th>Study_Type_Horstmann</th>
-      <th>Study_Type_Kjome</th>
-      <th>Study_Type_Maia</th>
-      <th>Study_Type_Premkumar</th>
-      <th>Study_Type_Steingroever2011</th>
-      <th>Study_Type_SteingroverInPrep</th>
-      <th>Study_Type_Wetzels</th>
-      <th>Study_Type_Wood</th>
-      <th>Study_Type_Worthy</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.675000</td>
-      <td>95</td>
-      <td>0.052910</td>
-      <td>0.880249</td>
-      <td>0.250000</td>
-      <td>0.062937</td>
-      <td>0.013423</td>
-      <td>0.525926</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>1.044988</td>
+      <td>-1.607073</td>
+      <td>-0.698836</td>
+      <td>-1.471413</td>
+      <td>1.525683</td>
+      <td>-0.477115</td>
+      <td>-1.386904</td>
+      <td>-1.089197</td>
+      <td>2.131753</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.446875</td>
-      <td>95</td>
-      <td>0.206349</td>
-      <td>0.676516</td>
-      <td>0.500000</td>
-      <td>0.181818</td>
-      <td>0.073826</td>
-      <td>0.244444</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>-0.414346</td>
+      <td>-1.607073</td>
+      <td>-0.698836</td>
+      <td>-0.538613</td>
+      <td>0.135451</td>
+      <td>1.024186</td>
+      <td>-0.420182</td>
+      <td>-0.668854</td>
+      <td>0.038743</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.437500</td>
-      <td>95</td>
-      <td>0.190476</td>
-      <td>0.681182</td>
-      <td>0.250000</td>
-      <td>0.244755</td>
-      <td>0.060403</td>
-      <td>0.281481</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>-0.474318</td>
+      <td>-1.607073</td>
+      <td>-0.698836</td>
+      <td>-0.635110</td>
+      <td>0.167288</td>
+      <td>-0.477115</td>
+      <td>0.091612</td>
+      <td>-0.762264</td>
+      <td>0.314139</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.465625</td>
-      <td>95</td>
-      <td>0.179894</td>
-      <td>0.701400</td>
-      <td>0.229167</td>
-      <td>0.237762</td>
-      <td>0.073826</td>
-      <td>0.281481</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>-0.294400</td>
+      <td>-1.607073</td>
+      <td>-0.698836</td>
+      <td>-0.699441</td>
+      <td>0.305250</td>
+      <td>-0.602224</td>
+      <td>0.034746</td>
+      <td>-0.668854</td>
+      <td>0.314139</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.543750</td>
-      <td>95</td>
-      <td>0.121693</td>
-      <td>0.774495</td>
-      <td>0.208333</td>
-      <td>0.167832</td>
-      <td>0.093960</td>
-      <td>0.340741</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>0.205371</td>
+      <td>-1.607073</td>
+      <td>-0.698836</td>
+      <td>-1.053262</td>
+      <td>0.804036</td>
+      <td>-0.727332</td>
+      <td>-0.533914</td>
+      <td>-0.528740</td>
+      <td>0.754773</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
-</div>
-<p>The first step of the clustering process is to determine a value for K. This can be done by:<br /></p>
-<ul class="simple">
-<li><p><strong>The Elbow Method</strong></p></li>
-<li><p><strong>Silhouette score</strong></p></li>
-<li><p><strong>SilhouetteVisualizer</strong></p></li>
-</ul>
-<p>Three methods will be used to find the best value for K to use for clustering</p>
-</div>
-<div class="section" id="methods-for-finding-k-value">
-<h2>Methods for finding K Value<a class="headerlink" href="#methods-for-finding-k-value" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Elbow(distortion and inertia) method and silhouette method</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>When the distortions are plotted and the plot looks like an arm then the <a class="reference external" href="https://predictivehacks.com/k-means-elbow-method-code-for-python/">“elbow”</a>(the point of inflection on the curve) is the best value of k.</p>
-<p>The formula for the Elbow method can be seen here: <br />
-$<span class="math notranslate nohighlight">\(
-    SSE = \sum_{i=1}^{N} {(y_i - ŷ_i)^2}
-\)</span>$</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
-<span class="n">distortions</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">K</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">K</span><span class="p">:</span>
-    <span class="n">kmeanModel</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
-    <span class="n">kmeanModel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-    <span class="n">distortions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kmeanModel</span><span class="o">.</span><span class="n">inertia_</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline 
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">distortions</span><span class="p">,</span> <span class="s1">&#39;bx-&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Distortion&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;The Elbow Method showing the optimal k&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/clustering_12_0.png" src="_images/clustering_12_0.png" />
-</div>
-</div>
-<p>silhouette score is used to to measure the degree of seperation between clusters</p>
-<p>The formula for the Elbow method can be seen here: <br />
-$<span class="math notranslate nohighlight">\(
-    s_{i} = \frac{b_{i} - a_{i}}{max(b_{i}, a_{i})}
-\)</span>$</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
-    <span class="n">km</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
-<span class="c1">#</span>
-<span class="c1"># Fit the KMeans model</span>
-<span class="c1"># Have to pick subset of columns as Study column is in string format</span>
-    <span class="n">km</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-<span class="c1">#</span>
-<span class="c1"># Calculate Silhoutte Score</span>
-<span class="c1">#</span>
-    <span class="n">score</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">km</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
-<span class="c1">#</span>
-<span class="c1"># Print the score</span>
-<span class="c1">#</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;N = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; Silhouette Score: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">score</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 2 Silhouette Score: 0.972
-N = 3 Silhouette Score: 0.802
-N = 4 Silhouette Score: 0.486
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 5 Silhouette Score: 0.613
-N = 6 Silhouette Score: 0.679
-N = 7 Silhouette Score: 0.615
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 8 Silhouette Score: 0.658
-N = 9 Silhouette Score: 0.695
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 10 Silhouette Score: 0.721
-</pre></div>
-</div>
-</div>
-</div>
-<p>Perform Comparative Analysis to Determine Best Value of K using Silhouette Plot</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">yellowbrick.cluster</span> <span class="kn">import</span> <span class="n">SilhouetteVisualizer</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]:</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Create KMeans instance for different number of clusters</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">km</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s1">&#39;k-means++&#39;</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-    <span class="n">q</span><span class="p">,</span> <span class="n">mod</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Create SilhouetteVisualizer instance with KMeans instance</span>
-<span class="sd">    Fit the visualizer</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">visualizer</span> <span class="o">=</span> <span class="n">SilhouetteVisualizer</span><span class="p">(</span><span class="n">km</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;yellowbrick&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="n">q</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">mod</span><span class="p">])</span>
-    <span class="n">visualizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/clustering_16_0.png" src="_images/clustering_16_0.png" />
-</div>
-</div>
-<p>From the various methods above the optimal value for K to bus used for clustering will be 2</p>
-<p>A scatter matrix is an array of scatter plots used to assess the relatsionship between many variables at once</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">scatter_matrix</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">),</span> <span class="n">hist_kwds</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Set1&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/clustering_19_0.png" src="_images/clustering_19_0.png" />
-</div>
-</div>
-<p>Looking at this initial scatter matrix it is clear to see there is a lot of noise.</p>
-<p>I will drop the study name columns to make findings more clear</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;No_participants&#39;</span><span class="p">,</span> <span class="s1">&#39;Study_Type_Fridberg&#39;</span><span class="p">,</span> <span class="s1">&#39;Study_Type_Horstmann&#39;</span><span class="p">,</span> <span class="s1">&#39;Study_Type_Kjome&#39;</span><span class="p">,</span> <span class="s1">&#39;Study_Type_Maia&#39;</span><span class="p">,</span> <span class="s1">&#39;Study_Type_Premkumar&#39;</span><span class="p">,</span> <span class="s1">&#39;Study_Type_Steingroever2011&#39;</span><span class="p">,</span> <span class="s1">&#39;Study_Type_SteingroverInPrep&#39;</span><span class="p">,</span> <span class="s1">&#39;Study_Type_Wetzels&#39;</span><span class="p">,</span> <span class="s1">&#39;Study_Type_Wood&#39;</span><span class="p">,</span> <span class="s1">&#39;Study_Type_Worthy&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Total</th>
-      <th>Amount_won</th>
-      <th>Amount_lost</th>
-      <th>1</th>
-      <th>2</th>
-      <th>3</th>
-      <th>4</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0.675000</td>
-      <td>0.052910</td>
-      <td>0.880249</td>
-      <td>0.250000</td>
-      <td>0.062937</td>
-      <td>0.013423</td>
-      <td>0.525926</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0.446875</td>
-      <td>0.206349</td>
-      <td>0.676516</td>
-      <td>0.500000</td>
-      <td>0.181818</td>
-      <td>0.073826</td>
-      <td>0.244444</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.437500</td>
-      <td>0.190476</td>
-      <td>0.681182</td>
-      <td>0.250000</td>
-      <td>0.244755</td>
-      <td>0.060403</td>
-      <td>0.281481</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0.465625</td>
-      <td>0.179894</td>
-      <td>0.701400</td>
-      <td>0.229167</td>
-      <td>0.237762</td>
-      <td>0.073826</td>
-      <td>0.281481</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0.543750</td>
-      <td>0.121693</td>
-      <td>0.774495</td>
-      <td>0.208333</td>
-      <td>0.167832</td>
-      <td>0.093960</td>
-      <td>0.340741</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">scatter_matrix</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">),</span> <span class="n">hist_kwds</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Set1&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/clustering_23_0.png" src="_images/clustering_23_0.png" />
-</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -831,72 +486,165 @@ N = 9 Silhouette Score: 0.695
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/clustering_25_0.png" src="_images/clustering_25_0.png" />
+<img alt="_images/clustering_7_0.png" src="_images/clustering_7_0.png" />
 </div>
 </div>
-<p>From my initial data we saw that of all the decks picked, deck no 2 was picked the most. It might be interesting to do some clustering on deck no2 for Amount_won, Amount_lost and totals compared to the other decks</p>
 </div>
-<div class="section" id="main-cluster-analysis">
-<h2>Main Cluster Analysis<a class="headerlink" href="#main-cluster-analysis" title="Permalink to this headline">¶</a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>kmeans.cluster_centers_ returns the coordinates of the centers</p>
+<div class="section" id="pca">
+<h2>PCA<a class="headerlink" href="#pca" title="Permalink to this headline">¶</a></h2>
+<p>To avoid the curse of dimensionality. The curse of dimensionality is the problem caused by the exponential increase in volume associated with adding extra dimensions to Euclidean space. To avoid this we can perform Principal Component analysis (PCA) to our data frame. This will leave use with an array of components.</p>
+<p>PCA is believed to imporve the performance for cluster analysis</p>
+<p>For the purpose of this assignment I will select 2 features to be used for clustering</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">df_tester</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Total&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">]])</span><span class="o">.</span><span class="n">cluster_centers_</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_tester</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.63798257, 0.16476381],
-       [0.39665248, 0.29604451]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-2.98565138, -0.90534442],
+       [-0.2845081 , -1.42223416],
+       [-0.54699829, -1.50399143],
+       ...,
+       [-0.20959764,  3.05643034],
+       [ 0.99635261,  3.05873358],
+       [ 5.87050839,  1.25408754]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The newly optained PCA scores will be incorporated in the the K-means algorithm</p>
+<p>The next step of the clustering process is to determine a value for K. This can be done by:<br /></p>
+<ul class="simple">
+<li><p><strong>The Elbow Method</strong></p></li>
+<li><p><strong>Silhouette score</strong></p></li>
+</ul>
+<p>These two methods will be used to find the best value for K to use for clustering</p>
+</div>
+<div class="section" id="methods-for-finding-k-value">
+<h2>Methods for finding K Value<a class="headerlink" href="#methods-for-finding-k-value" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Elbow(distortion and inertia) method and silhouette method</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When the distortions are plotted and the plot looks like an arm then the <a class="reference external" href="https://predictivehacks.com/k-means-elbow-method-code-for-python/">“elbow”</a>(the point of inflection on the curve) is the best value of k.</p>
+<p>The formula for the Elbow method can be seen here: <br />
+$<span class="math notranslate nohighlight">\(
+    Sum Squared Errors = \sum_{i=1}^{N} {(y_i - ŷ_i)^2}
+\)</span>$</p>
+<p>The formula for the Silhouette Score method can be seen here: <br />
+$<span class="math notranslate nohighlight">\(
+    s_{i} = \frac{b_{i} - a_{i}}{max(b_{i}, a_{i})}
+\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wcss</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">21</span><span class="p">):</span>
+    <span class="n">k_means_pca</span><span class="o">=</span><span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s2">&quot;k-means++&quot;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">k_means_pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_tester</span><span class="p">)</span>
+    <span class="n">wcss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k_means_pca</span><span class="o">.</span><span class="n">inertia_</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kmeans_margin_standard</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Total&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">]])</span>
-<span class="n">centroids_betas_standard</span> <span class="o">=</span> <span class="n">kmeans_margin_standard</span><span class="o">.</span><span class="n">cluster_centers_</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Total&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;2&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span> <span class="n">kmeans_margin_standard</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;Set1&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">centroids_betas_standard</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">centroids_betas_standard</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;K-Means cluster for all Totals: Selection - Deck 2&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Total&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Deck 2 Selected&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">21</span><span class="p">),</span> <span class="n">wcss</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Number of Clusters&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;WCSS&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;K-means with PCA Clustering&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/clustering_31_0.png" src="_images/clustering_31_0.png" />
+<img alt="_images/clustering_20_0.png" src="_images/clustering_20_0.png" />
 </div>
 </div>
-<p>Curse of Dimensionality</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kmeans</span><span class="o">.</span><span class="n">inertia_</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">21</span><span class="p">):</span>
+    <span class="n">km</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">km</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">df_tester</span><span class="p">)</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">km</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;N = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; Silhouette Score: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">score</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">17</span><span class="o">-</span><span class="mi">9</span><span class="n">c859d8e0da1</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">inertia_</span>
-
-<span class="ne">NameError</span>: name &#39;kmeans&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 2 Silhouette Score: 0.258
+N = 3 Silhouette Score: 0.263
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 4 Silhouette Score: 0.261
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 5 Silhouette Score: 0.188
+N = 6 Silhouette Score: 0.187
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 7 Silhouette Score: 0.155
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 8 Silhouette Score: 0.157
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 9 Silhouette Score: 0.132
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 10 Silhouette Score: 0.105
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 11 Silhouette Score: 0.100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 12 Silhouette Score: 0.080
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 13 Silhouette Score: 0.079
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 14 Silhouette Score: 0.070
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 15 Silhouette Score: 0.053
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 16 Silhouette Score: 0.058
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 17 Silhouette Score: 0.072
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 18 Silhouette Score: 0.066
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 19 Silhouette Score: 0.062
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 20 Silhouette Score: 0.057
 </pre></div>
 </div>
 </div>
 </div>
+<p>From looking at the Elbow blot and</p>
+<p>The formula for the Elbow method can be seen here: <br />
+$<span class="math notranslate nohighlight">\(
+    s_{i} = \frac{b_{i} - a_{i}}{max(b_{i}, a_{i})}
+\)</span>$</p>
+<p>From the various methods above the optimal value for K to bus used for clustering will be 4</p>
 </div>
 </div>
 
@@ -938,6 +686,15 @@ N = 9 Silhouette Score: 0.695
             </div>
         </a>
     </div>
+     <div id="next">
+        <a class="right-next" href="kmeansvariation.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">&lt;no title&gt;</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
 
 </div>
         

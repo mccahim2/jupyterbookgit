@@ -386,6 +386,8 @@ all_data_100.groupby("Study_Type")["Total"].sum()
 all_data_100.groupby("Study_Type")["Total"].sum().plot.bar(figsize=(15,7.5))
 
 
+# Look into Maia study and see why it was the only one to make any money
+
 # In[43]:
 
 
@@ -558,11 +560,7 @@ all_data.head()
 
 # From my initial analysis it is clear to see that the 1st deck of cards is selected the least.
 
-# In[ ]:
-
-
-
-
+# From my initial data we saw that of all the decks picked, deck no 2 was picked the most. It might be interesting to do some clustering on deck no2 for Amount_won, Amount_lost and totals compared to the other decks. Along with deck 2, I would also like to perform cluster analysis on the other decks to see if there are any similarities.
 
 # The final step is to export the cleaned data set for data preparation
 

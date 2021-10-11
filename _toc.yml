@@ -10,3 +10,5 @@ chapters:
 - file: data_prep
 - file: preparation
 - file: clustering
+- file: kmeansvariation
+- file: conclusion
