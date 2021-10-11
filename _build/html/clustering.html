@@ -236,6 +236,11 @@
    Methods for finding K Value
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementation-of-the-k-means-clustering-process">
+   Implementation of the K-means Clustering Process
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -584,67 +589,273 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 2 Silhouette Score: 0.258
-N = 3 Silhouette Score: 0.263
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 2 Silhouette Score: 0.266
+N = 3 Silhouette Score: 0.265
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 4 Silhouette Score: 0.261
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 5 Silhouette Score: 0.188
-N = 6 Silhouette Score: 0.187
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 7 Silhouette Score: 0.155
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 6 Silhouette Score: 0.186
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 8 Silhouette Score: 0.157
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 7 Silhouette Score: 0.154
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 9 Silhouette Score: 0.132
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 8 Silhouette Score: 0.159
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 9 Silhouette Score: 0.121
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 10 Silhouette Score: 0.105
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 11 Silhouette Score: 0.100
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 11 Silhouette Score: 0.089
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 12 Silhouette Score: 0.080
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 12 Silhouette Score: 0.068
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 13 Silhouette Score: 0.079
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 13 Silhouette Score: 0.062
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 14 Silhouette Score: 0.070
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 14 Silhouette Score: 0.073
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 15 Silhouette Score: 0.053
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 15 Silhouette Score: 0.076
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 16 Silhouette Score: 0.058
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 16 Silhouette Score: 0.068
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 17 Silhouette Score: 0.072
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 17 Silhouette Score: 0.061
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 18 Silhouette Score: 0.066
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 18 Silhouette Score: 0.055
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 19 Silhouette Score: 0.062
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 19 Silhouette Score: 0.078
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 20 Silhouette Score: 0.057
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N = 20 Silhouette Score: 0.054
 </pre></div>
 </div>
 </div>
 </div>
-<p>From looking at the Elbow blot and</p>
-<p>The formula for the Elbow method can be seen here: <br />
-$<span class="math notranslate nohighlight">\(
-    s_{i} = \frac{b_{i} - a_{i}}{max(b_{i}, a_{i})}
-\)</span>$</p>
-<p>From the various methods above the optimal value for K to bus used for clustering will be 4</p>
+<p>From the various methods above the optimal value for K to us used for clustering will be 4</p>
+</div>
+<div class="section" id="implementation-of-the-k-means-clustering-process">
+<h2>Implementation of the K-means Clustering Process<a class="headerlink" href="#implementation-of-the-k-means-clustering-process" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k_means_pca</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s2">&quot;k-means++&quot;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k_means_pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_tester</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KMeans(n_clusters=4, random_state=42)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_segm_pca_kmeans</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_tester</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_segm_pca_kmeans</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Component 1&quot;</span><span class="p">,</span> <span class="s2">&quot;Component 2&quot;</span><span class="p">]</span>
+
+<span class="n">df_segm_pca_kmeans</span><span class="p">[</span><span class="s2">&quot;Segment K-means PCA&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">k_means_pca</span><span class="o">.</span><span class="n">labels_</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_segm_pca_kmeans</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total</th>
+      <th>Study_Type</th>
+      <th>No_participants</th>
+      <th>Amount_won</th>
+      <th>Amount_lost</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>Component 1</th>
+      <th>Component 2</th>
+      <th>Segment K-means PCA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.044988</td>
+      <td>-1.607073</td>
+      <td>-0.698836</td>
+      <td>-1.471413</td>
+      <td>1.525683</td>
+      <td>-0.477115</td>
+      <td>-1.386904</td>
+      <td>-1.089197</td>
+      <td>2.131753</td>
+      <td>-2.985651</td>
+      <td>-0.905344</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.414346</td>
+      <td>-1.607073</td>
+      <td>-0.698836</td>
+      <td>-0.538613</td>
+      <td>0.135451</td>
+      <td>1.024186</td>
+      <td>-0.420182</td>
+      <td>-0.668854</td>
+      <td>0.038743</td>
+      <td>-0.284508</td>
+      <td>-1.422234</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.474318</td>
+      <td>-1.607073</td>
+      <td>-0.698836</td>
+      <td>-0.635110</td>
+      <td>0.167288</td>
+      <td>-0.477115</td>
+      <td>0.091612</td>
+      <td>-0.762264</td>
+      <td>0.314139</td>
+      <td>-0.546998</td>
+      <td>-1.503991</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-0.294400</td>
+      <td>-1.607073</td>
+      <td>-0.698836</td>
+      <td>-0.699441</td>
+      <td>0.305250</td>
+      <td>-0.602224</td>
+      <td>0.034746</td>
+      <td>-0.668854</td>
+      <td>0.314139</td>
+      <td>-0.793550</td>
+      <td>-1.393272</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.205371</td>
+      <td>-1.607073</td>
+      <td>-0.698836</td>
+      <td>-1.053262</td>
+      <td>0.804036</td>
+      <td>-0.727332</td>
+      <td>-0.533914</td>
+      <td>-0.528740</td>
+      <td>0.754773</td>
+      <td>-1.757736</td>
+      <td>-1.109075</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_segm_pca_kmeans</span><span class="p">[</span><span class="s2">&quot;Segment K-means PCA&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    308
+1    208
+2     61
+3     40
+Name: Segment K-means PCA, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_segm_pca_kmeans</span><span class="p">[</span><span class="s2">&quot;Segment&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_segm_pca_kmeans</span><span class="p">[</span><span class="s2">&quot;Segment K-means PCA&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span><span class="s2">&quot;first&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="s2">&quot;second&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s2">&quot;third&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="s2">&quot;fourth&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_segm_pca_kmeans</span><span class="p">[</span><span class="s2">&quot;Segment&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>first     308
+second    208
+third      61
+fourth     40
+Name: Segment, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_axis</span> <span class="o">=</span> <span class="n">df_segm_pca_kmeans</span><span class="p">[</span><span class="s2">&quot;Component 1&quot;</span><span class="p">]</span>
+<span class="n">y_axis</span> <span class="o">=</span> <span class="n">df_segm_pca_kmeans</span><span class="p">[</span><span class="s2">&quot;Component 2&quot;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">y_axis</span><span class="p">,</span> <span class="n">hue</span> <span class="o">=</span> <span class="n">df_segm_pca_kmeans</span><span class="p">[</span><span class="s2">&quot;Segment&quot;</span><span class="p">],</span> <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Clusters by PCA Components&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/michael/anaconda3/lib/python3.7/site-packages/seaborn/_decorators.py:43: FutureWarning: Pass the following variables as keyword args: x, y. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+  FutureWarning
+</pre></div>
+</div>
+<img alt="_images/clustering_31_1.png" src="_images/clustering_31_1.png" />
+</div>
+</div>
 </div>
 </div>
 

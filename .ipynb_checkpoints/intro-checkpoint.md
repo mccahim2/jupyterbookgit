@@ -12,6 +12,10 @@ The data being used for this assignment is taken from many different labs rangin
 The smallest study uses 15 participants while the biggest study uses 162 participants.
 :::
 
+The datasets below used various different pay off schemes
+
+The data is gathered from independent studies
+
 Here is a list of the data sets being used for the assignment:
 
 | Study                  | Number of participants | Number of trials |
@@ -28,6 +32,14 @@ Here is a list of the data sets being used for the assignment:
 | Worthy et al. 17       | 35                     | 100              |
 
 A link to the data is available [here](https://openpsychologydata.metajnl.com/articles/10.5334/jopd.ak/)
+
+Fridberg et al.3, Worth et al., amd Mai&McClelland all fall under payoff scheme no 1.
+
+Horstmann, Steingroever er al8., Steingroever er al9., and Wetzels et al. all fall under payoff scheme no2.
+
+The rest of the studies are parrt of payoff scheme no 3. (Kjome et al., Premkumar et al., and Wood et al.)
+
+The description of the payoff schemes can be found (here)[https://s3-eu-west-1.amazonaws.com/ubiquity-partner-network/up/journal/jopd/ak/sup-text.pdf]
 
 As part of this assignment, k-means clustering will be used on the data sets above.
 Clustering is an unsupervised machine learning problem, often used to find interesting patterns in data

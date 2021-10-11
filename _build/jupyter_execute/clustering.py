@@ -129,68 +129,64 @@ for n in range(2, 21):
     print('N = ' + str(n) + ' Silhouette Score: %.3f' % score)
 
 
-# From looking at the Elbow blot and 
+# From the various methods above the optimal value for K to us used for clustering will be 4
 
-# 
-# The formula for the Elbow method can be seen here: <br />
-# $$
-#     s_{i} = \frac{b_{i} - a_{i}}{max(b_{i}, a_{i})}
-# $$
+# ### Implementation of the K-means Clustering Process
 
-# From the various methods above the optimal value for K to bus used for clustering will be 4
-
-# In[ ]:
+# In[11]:
 
 
+k_means_pca = KMeans(n_clusters=4, init="k-means++", random_state=42)
 
 
-
-# In[ ]:
-
+# In[12]:
 
 
+k_means_pca.fit(df_tester)
 
 
-# In[ ]:
+# In[13]:
 
 
+df_segm_pca_kmeans = pd.concat([df.reset_index(drop=True), pd.DataFrame(df_tester)], axis=1)
+df_segm_pca_kmeans.columns.values[-2:] = ["Component 1", "Component 2"]
+
+df_segm_pca_kmeans["Segment K-means PCA"] = k_means_pca.labels_
 
 
-
-# In[ ]:
-
+# In[14]:
 
 
+df_segm_pca_kmeans.head()
 
 
-# In[ ]:
+# In[15]:
 
 
+df_segm_pca_kmeans["Segment K-means PCA"].value_counts()
 
 
-
-# In[ ]:
-
+# In[16]:
 
 
+df_segm_pca_kmeans["Segment"] = df_segm_pca_kmeans["Segment K-means PCA"].map({0:"first", 1:"second", 2:"third", 3:"fourth"})
 
 
-# In[ ]:
+# In[17]:
 
 
+df_segm_pca_kmeans["Segment"].value_counts()
 
 
-
-# In[ ]:
-
+# In[18]:
 
 
-
-
-# In[ ]:
-
-
-
+x_axis = df_segm_pca_kmeans["Component 1"]
+y_axis = df_segm_pca_kmeans["Component 2"]
+plt.figure(figsize = (10, 8))
+sns.scatterplot(x_axis, y_axis, hue = df_segm_pca_kmeans["Segment"], palette=["g", "r", "c", "m"])
+plt.title("Clusters by PCA Components")
+plt.show()
 
 
 # In[ ]:
