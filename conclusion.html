@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>&lt;no title&gt; &#8212; CA4015 Clustering Assignment - Iowa Gambling Task</title>
+    <title>Conclusions &#8212; CA4015 Clustering Assignment - Iowa Gambling Task</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -59,36 +59,9 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="kmeansvariation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -129,7 +102,7 @@
   </a>
  </li>
 </ul>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="notebooks.html">
    Data Cleaning and Exploration
@@ -145,8 +118,8 @@
    K-Means Clustering
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="conclusion.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Conclusions
   </a>
  </li>
@@ -191,7 +164,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/markdown.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/conclusion.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -211,7 +184,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/mccahim2/jupyterbookgit/issues/new?title=Issue%20on%20page%20%2Fmarkdown.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/mccahim2/jupyterbookgit/issues/new?title=Issue%20on%20page%20%2Fconclusion.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -232,14 +205,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -248,77 +213,9 @@
         
               <div>
                 
-  <div class="highlight-{.cell notranslate"><div class="highlight"><pre><span></span>```` {.python}
-# Data preparation for clustering
-
-``` python
-import pandas as pd
-import numpy as np
-```
-
-Importing cleaned data
-
-``` python
-all_data = pd.read_csv(&#39;data/all_data.csv&#39;)
-```
-
-``` python
-all_data.head()
-```
-
-(get_dummies)\[\[https://www.geeksforgeeks.org/python-pandas-get_dummies-method/\\\](https://www.geeksforgeeks.org/python-pandas-get_dummies-method/){.uri}\] is a data manipulation function used to convert categorical data into indicator variables
-
-``` python
-all_data = pd.get_dummies(all_data, columns=[&quot;Study_Type&quot;])
-```
-
-``` python
-all_data
-```
-
-``` python
-```
-
-``` python
-```
-
-``` python
-```
-
-``` python
-```
-
-``` python
-```
-
-``` python
-```
-
-``` python
-```
-
-``` python
-```
-
-``` python
-```
-
-``` python
-```
-
-``` python
-```
-
-``` python
-```
-
-``` python
-```
-
-``` python
-```
-````
-</pre></div>
+  <div class="section" id="conclusions">
+<h1>Conclusions<a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h1>
+<p>The first conclusion that stuck out was the fact that deck 2 was the most selected deck out of all the decks. Deck 2 was considered to be a “bad” deck and reward less compared to decks 3 and 4.</p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -350,6 +247,15 @@ all_data
 
 <div class='prev-next-bottom'>
     
+    <div id="prev">
+        <a class="left-prev" href="kmeansvariation.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">&lt;no title&gt;</p>
+            </div>
+        </a>
+    </div>
 
 </div>
         
